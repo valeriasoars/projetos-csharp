@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using crud_usuario.Service.Usuario;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace crud_usuario.Controllers
@@ -7,5 +8,17 @@ namespace crud_usuario.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+        private readonly IUsuarioInterface _usuarioInterface;
+        public UsuarioController(IUsuarioInterface usuarioInterface)
+        {
+            _usuarioInterface = usuarioInterface;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListarUsuarios()
+        {
+            var response = await _usuarioInterface.ListarUsuarios();
+            return Ok(response);
+        }
     }
 }
