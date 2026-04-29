@@ -12,6 +12,30 @@ namespace crud_usuario.Service.Usuario
             _context = context;
         }
 
+        public async Task<ResponseModel<UsuarioModel>> BuscarUsuarioPorId(int id)
+        {
+            ResponseModel<UsuarioModel> response = new ResponseModel<UsuarioModel>();
+
+            try
+            {
+                var usuario = await _context.Usuarios.FindAsync(id);
+                if(usuario == null)
+                {
+                    response.Mensagem = "Usuário não encontrado.";
+                    return response;
+                }
+
+                response.Dados = usuario;
+                response.Mensagem = "Usuário encontrado com sucesso.";
+                return response;
+            }
+            catch (Exception ex) 
+            { 
+                response.Mensagem = $"Ocorreu um erro ao buscar o usuário: {ex.Message}";
+                response.Status = false;
+                return response;
+            }
+        }
 
         public async Task<ResponseModel<List<UsuarioModel>>> ListarUsuarios()
         {

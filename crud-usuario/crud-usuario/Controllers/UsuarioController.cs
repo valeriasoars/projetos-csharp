@@ -20,5 +20,14 @@ namespace crud_usuario.Controllers
             var response = await _usuarioInterface.ListarUsuarios();
             return Ok(response);
         }
+
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> BuscarUsuarioPorId(int id)
+        {
+            var response = await _usuarioInterface.BuscarUsuarioPorId(id);
+            return Ok(response);
+        }
     }
 }
