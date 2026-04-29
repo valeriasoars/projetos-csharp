@@ -29,5 +29,13 @@ namespace crud_usuario.Controllers
             var response = await _usuarioInterface.BuscarUsuarioPorId(id);
             return Ok(response);
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoverUsuario(int id)
+        {
+            var response = await _usuarioInterface.RemoverUsuario(id);
+            return Ok(response);
+        }
     }
 }

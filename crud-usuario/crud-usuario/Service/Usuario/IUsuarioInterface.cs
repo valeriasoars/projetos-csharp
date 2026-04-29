@@ -6,6 +6,7 @@ namespace crud_usuario.Service.Usuario
     {
         Task<ResponseModel<List<UsuarioModel>>> ListarUsuarios();
         Task<ResponseModel<UsuarioModel>> BuscarUsuarioPorId(int id);
+        Task<ResponseModel<UsuarioModel>> RemoverUsuario(int id);
 
     }
 }

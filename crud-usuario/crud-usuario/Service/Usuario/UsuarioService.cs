@@ -19,7 +19,7 @@ namespace crud_usuario.Service.Usuario
             try
             {
                 var usuario = await _context.Usuarios.FindAsync(id);
-                if(usuario == null)
+                if (usuario == null)
                 {
                     response.Mensagem = "Usuário não encontrado.";
                     return response;
@@ -29,8 +29,8 @@ namespace crud_usuario.Service.Usuario
                 response.Mensagem = "Usuário encontrado com sucesso.";
                 return response;
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 response.Mensagem = $"Ocorreu um erro ao buscar o usuário: {ex.Message}";
                 response.Status = false;
                 return response;
@@ -53,11 +53,38 @@ namespace crud_usuario.Service.Usuario
 
                 response.Dados = usuarios;
                 response.Mensagem = "Usuários listados com sucesso.";
-               
+
                 return response;
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 response.Mensagem = $"Ocorreu um erro ao listar os usuários: {ex.Message}";
+                response.Status = false;
+                return response;
+            }
+        }
+
+        public async Task<ResponseModel<UsuarioModel>> RemoverUsuario(int id)
+        {
+            ResponseModel<UsuarioModel> response = new ResponseModel<UsuarioModel>();
+            try
+            {
+                var usuario = await _context.Usuarios.FindAsync(id);
+                if (usuario == null)
+                {
+                    response.Mensagem = "Usuário não encontrado.";
+                    return response;
+                }
+
+                _context.Usuarios.Remove(usuario);
+                await _context.SaveChangesAsync();
+                response.Dados = usuario;
+                response.Mensagem = $"Usuário {usuario.Nome} removido com sucesso.";
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Mensagem = $"Ocorreu um erro ao remover o usuário: {ex.Message}";
                 response.Status = false;
                 return response;
             }
