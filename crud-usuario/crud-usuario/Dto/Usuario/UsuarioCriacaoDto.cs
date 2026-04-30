@@ -18,15 +18,15 @@ namespace crud_usuario.Dto.Usuario
         public string Email { get; set; }
 
 
-        public DateTime DataCriacao { get; set; }
-        public DateTime DataAlteracao { get; set; }
-       
+        public DateTime DataCriacao { get; set; } = DateTime.Now;
+        public DateTime DataAlteracao { get; set; } = DateTime.Now;
+
 
         [Required(ErrorMessage = "O campo Senha é obrigatório.")]
-        public string senha { get; set; }
+        public string Senha { get; set; }
 
         [Required(ErrorMessage = "O campo Confirma Senha é obrigatório.")]
-        [Compare("senha", ErrorMessage = "As senhas não coincidem.")]
-        public string confirmaSenha{ get; set; }
+        [Compare("Senha", ErrorMessage = "As senhas não coincidem.")]
+        public string ConfirmaSenha{ get; set; }
     }
 }

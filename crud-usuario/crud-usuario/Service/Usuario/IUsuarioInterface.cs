@@ -1,4 +1,5 @@
-﻿using crud_usuario.Models;
+﻿using crud_usuario.Dto.Usuario;
+using crud_usuario.Models;
 
 namespace crud_usuario.Service.Usuario
 {
@@ -7,6 +8,7 @@ namespace crud_usuario.Service.Usuario
         Task<ResponseModel<List<UsuarioModel>>> ListarUsuarios();
         Task<ResponseModel<UsuarioModel>> BuscarUsuarioPorId(int id);
         Task<ResponseModel<UsuarioModel>> RemoverUsuario(int id);
+        Task<ResponseModel<UsuarioModel>> RegistrarUsuario(UsuarioCriacaoDto usuarioCriacaoDto);
 
     }
 }
