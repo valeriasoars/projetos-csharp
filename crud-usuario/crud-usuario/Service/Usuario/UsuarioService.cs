@@ -44,6 +44,40 @@ namespace crud_usuario.Service.Usuario
             }
         }
 
+        public async Task<ResponseModel<UsuarioModel>> EditarUsuario(UsuarioEdicaoDto usuarioEdicaoDto)
+        {
+            ResponseModel<UsuarioModel> response = new ResponseModel<UsuarioModel>();
+
+            try
+            {
+                UsuarioModel usuarioBanco = await _context.Usuarios.FindAsync(usuarioEdicaoDto.Id);
+
+                if (usuarioBanco == null)
+                {
+                    response.Mensagem = "Usuário não encontrado.";
+                    return response;
+                }
+
+                usuarioBanco.Nome = usuarioEdicaoDto.Nome;
+                usuarioBanco.Sobrenome = usuarioEdicaoDto.Sobrenome;
+                usuarioBanco.Email = usuarioEdicaoDto.Email;
+                usuarioBanco.Usuario = usuarioEdicaoDto.Usuario;
+                usuarioBanco.DataAlteracao = DateTime.Now;
+
+                _context.Usuarios.Update(usuarioBanco);
+                await _context.SaveChangesAsync();
+                response.Dados = usuarioBanco;
+                response.Mensagem = "Usuário editado com sucesso.";
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Mensagem = $"Ocorreu um erro ao editar o usuário: {ex.Message}";
+                response.Status = false;
+                return response;
+            }
+        }
+
         public async Task<ResponseModel<List<UsuarioModel>>> ListarUsuarios()
         {
             ResponseModel<List<UsuarioModel>> response = new ResponseModel<List<UsuarioModel>>();

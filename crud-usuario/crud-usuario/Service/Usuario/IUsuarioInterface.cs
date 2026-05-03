@@ -9,6 +9,7 @@ namespace crud_usuario.Service.Usuario
         Task<ResponseModel<UsuarioModel>> BuscarUsuarioPorId(int id);
         Task<ResponseModel<UsuarioModel>> RemoverUsuario(int id);
         Task<ResponseModel<UsuarioModel>> RegistrarUsuario(UsuarioCriacaoDto usuarioCriacaoDto);
+        Task<ResponseModel<UsuarioModel>> EditarUsuario(UsuarioEdicaoDto usuarioEdicaoDto);
 
     }
 }
